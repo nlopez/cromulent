@@ -6,8 +6,8 @@ title="Chromium"
 applicationName="${title}.app"
 size="100m"
 tmp="$(mktemp -d /tmp/$(basename $0).XXXXXXXX)"
-dmg_tmp="${tmp}/${title}.dmg_tmp"
-dmg="/Users/nlopez/Dropbox/Public/Chromium-$(svn info /Users/nlopez/chromium/src/ | egrep "^Revision" | awk '{print $2}').dmg_tmp"
+dmg_tmp="${tmp}/${title}.dmg"
+dmg="/Users/nlopez/Dropbox/Public/Chromium-$(svn info /Users/nlopez/chromium/src/ | egrep "^Revision" | awk '{print $2}').dmg"
 
 hdiutil create -srcfolder "${src}" -volname "${title}" -fs HFS+ \
 	-fsargs "-c c=64,a=16,e=16" -format UDRW -size "${size}" \
