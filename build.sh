@@ -6,6 +6,6 @@ export GYP_DEFINES="clang=1 mac_sdk=10.6 fastbuild=1"
 chromium_dir="${HOME}/chromium"
 
 jobs="$(((2*$(sysctl -n hw.ncpu))+1))"
-cd "${chromium_dir}"
-"${chromium_dir}/src/build/gyp_chromium"
-make -j $jobs chrome
+cd "${chromium_dir}/src"
+./build/gyp_chromium
+make -j$jobs chrome

@@ -4,7 +4,7 @@ solutions = [
     "safesync_url": "https://chromium-status.appspot.com/lkgr",
     "deps_file"   : "DEPS",
     "managed"     : True,
-    "custom_deps": {      
+    "custom_deps": {
     "src/third_party/WebKit/LayoutTests": None,
     "src/chrome/tools/test/reference_build/chrome": None,
     "src/chrome_frame/tools/test/reference_build/chrome": None,
