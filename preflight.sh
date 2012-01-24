@@ -1,7 +1,18 @@
 #!/usr/bin/env bash
 cwd="$(dirname ${0})"
 
-# Preferntially use a user's settings instead of our defaults
+# Make sure the binaries we need are available
+binaries=( gclient make clang hdiutil )
+for binary in ${binaries[@]}; do
+  which "${binary}" 2>&1 > /dev/null
+  test="${?}"
+  if (( ${test} != 0 )); then
+    echo "${binary} not found in your PATH. Cannot proceed." 1>&2
+    exit 1
+  fi
+done
+
+# Preferentially use a user's settings instead of our defaults
 if [[ -f "${cwd}/cromulent.local" ]]; then
   conf_file="${cwd}/cromulent.local"
 else
