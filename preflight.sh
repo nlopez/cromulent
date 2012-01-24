@@ -4,7 +4,7 @@ cwd="$(dirname ${0})"
 # Make sure the binaries we need are available
 binaries=( gclient make clang hdiutil )
 for binary in ${binaries[@]}; do
-  which "${binary}" 2>&1 > /dev/null
+  type "${binary}" 2>&1 > /dev/null
   test="${?}"
   if (( ${test} != 0 )); then
     echo "${binary} not found in your PATH. Cannot proceed." 1>&2
