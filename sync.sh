@@ -1,23 +1,23 @@
 #!/usr/bin/env bash
-set -eux
-chromium_dir="${HOME}/chromium"
-chromium_dir_src="${chromium_dir}/src"
+cwd="$(dirname ${0})"
+source "${cwd}/preflight.sh"
+jobs=16
 
-do_initial_sync(){
-	cp -v "$(dirname ${0})/gclient-conf-init" "${chromium_dir}/.gclient"
-	cd "${chromium_dir}"
-	gclient sync --jobs 16
+do_sync_init(){
+  sed '/safesync_url/d' "${cwd}/gclient-conf-init" > "${CHROMIUM_ROOT}/.gclient"
+  cd "${CHROMIUM_ROOT}"
+  gclient sync --jobs=$jobs
 }
 
 do_sync(){
-	cp -v "$(dirname ${0})/gclient-conf" "${chromium_dir}/.gclient"
-	cd "${chromium_dir}"
-	gclient sync --jobs 16
+  cp "${cwd}/gclient-conf" "${CHROMIUM_ROOT}/.gclient"
+  cd "${CHROMIUM_ROOT}"
+  gclient sync --jobs=$jobs
 }
 
-if [[ ! -e "${chromium_dir}" ]]; then 
-	mkdir -p "${chromium_dir}"
-	do_initial_sync
+if [[ ! -d "${CHROMIUM_ROOT}" ]]; then
+  mkdir -p "${CHROMIUM_ROOT}"
+  do_sync_init
 else
-	do_sync
+  do_sync
 fi
